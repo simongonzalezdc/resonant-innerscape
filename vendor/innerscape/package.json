@@ -1,0 +1,76 @@
+{
+  "name": "innerscape",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal growth OS in TypeScript: journaling, emotional check-ins, habits, goals, tasks, sleep logs, decluttering, and self-awareness workflows.",
+  "keywords": [
+    "personal-growth",
+    "life-os",
+    "journaling",
+    "habits",
+    "goals",
+    "productivity",
+    "well-being",
+    "mental-health",
+    "self-awareness",
+    "neurodivergent",
+    "expo",
+    "react-native",
+    "fastify",
+    "prisma",
+    "postgresql",
+    "typescript"
+  ],
+  "homepage": "https://kyanitelabs.tech",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KyaniteLabs/Innerscape.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KyaniteLabs/Innerscape/issues"
+  },
+  "license": "MIT",
+  "bin": {
+    "innerscape": "./tools/innerscape-cli.mjs",
+    "innerscape-mcp": "./tools/innerscape-mcp.mjs"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev --workspace=apps/backend",
+    "dev:mobile": "npm run dev --workspace=apps/mobile",
+    "build": "npm run build --workspaces --if-present",
+    "build:shared": "npm run build --workspace=packages/shared",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "cli": "node tools/innerscape-cli.mjs",
+    "mcp": "node tools/innerscape-mcp.mjs",
+    "clean": "rm -rf apps/mobile/.expo apps/mobile/node_modules/.cache apps/backend/dist"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "eslint": "^10.4.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.6.0",
+    "prettier": "^3.4.0",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.60.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "expo": "^56.0.8",
+    "react": "19.2.6",
+    "react-native": "0.83.6"
+  },
+  "overrides": {
+    "@prisma/dev": {
+      "@hono/node-server": "1.19.13"
+    },
+    "postcss": "8.5.14"
+  }
+}

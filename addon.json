@@ -1,0 +1,237 @@
+{
+  "id": "addon.innerscape",
+  "name": "Innerscape",
+  "version": "0.1.0",
+  "author": "KyaniteLabs",
+  "category": "integration",
+  "sdkVersion": "0.1.0",
+  "description": "Innerscape's local agent surface \u2014 project brief, module map, and bounded reflective planning prompts \u2014 as a private, local-only ResonantOS service. Journaling and emotional-check-in data never enter this add-on: the exposed CLI module is stateless and data-free, nothing is persisted, nothing is sent anywhere, and the manifest requests zero capabilities.",
+  "runtimeType": "local-service",
+  "surfaces": [],
+  "requestedCapabilities": [],
+  "provenance": {
+    "tier": "sideloaded-unverified",
+    "verificationState": "unverified",
+    "signed": false
+  },
+  "runtimeIsolation": {
+    "boundary": "host-mediated-service",
+    "supportsDegradedMode": true,
+    "requiresReviewedGrant": true
+  },
+  "providerRequirements": {
+    "sharedProfiles": [],
+    "supportsPrivateCredentials": false
+  },
+  "systemSlots": [],
+  "archiveIntegration": {
+    "readScopes": [],
+    "intakeWriteScopes": [],
+    "canRequestIngest": false,
+    "canWriteKnowledgePages": false
+  },
+  "health": {
+    "strategy": "http-json-status"
+  },
+  "service": {
+    "protocol": "http-json",
+    "entrypoint": "http://127.0.0.1:4895",
+    "healthCommand": "innerscape.status"
+  },
+  "tools": [
+    {
+      "name": "innerscape.status",
+      "description": "Report service version and the pinned upstream Innerscape version.",
+      "requiredCapabilities": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "addon": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          },
+          "upstream": {
+            "type": "string"
+          },
+          "commands": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "error": {
+            "type": "string",
+            "description": "Present on 400/404/500 responses"
+          }
+        }
+      },
+      "audit": {
+        "logRequest": true,
+        "logResult": true,
+        "artifactTypes": [
+          "log"
+        ]
+      },
+      "requiresHumanApproval": false
+    },
+    {
+      "name": "innerscape.brief",
+      "description": "Return Innerscape's project brief: identity, summary, module map, declared surfaces, and the reflective-support guardrail. Stateless and synchronous.",
+      "requiredCapabilities": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "command": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "error": {
+            "type": "string",
+            "description": "Present on 400/404/500 responses"
+          }
+        }
+      },
+      "audit": {
+        "logRequest": true,
+        "logResult": true,
+        "artifactTypes": [
+          "log"
+        ]
+      },
+      "requiresHumanApproval": false
+    },
+    {
+      "name": "innerscape.modules",
+      "description": "List Innerscape's modules (Mind, Flow, Body, Hub, Trade) and how agents should use each one without overstepping. Stateless and synchronous.",
+      "requiredCapabilities": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "command": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object"
+          },
+          "error": {
+            "type": "string",
+            "description": "Present on 400/404/500 responses"
+          }
+        }
+      },
+      "audit": {
+        "logRequest": true,
+        "logResult": true,
+        "artifactTypes": [
+          "log"
+        ]
+      },
+      "requiresHumanApproval": false
+    },
+    {
+      "name": "innerscape.plan",
+      "description": "Create a bounded reflective planning prompt for an Innerscape workflow (focus, energy, horizon \u2014 all optional with upstream defaults). Returns prompt text; it never plans for you and never touches personal data.",
+      "requiredCapabilities": [],
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "focus": {
+            "type": "string",
+            "maxLength": 256
+          },
+          "energy": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "horizon": {
+            "type": "string",
+            "maxLength": 64
+          }
+        },
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "command": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "focus": {
+                "type": "string"
+              },
+              "energy": {
+                "type": "string"
+              },
+              "horizon": {
+                "type": "string"
+              },
+              "prompt": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "error": {
+            "type": "string",
+            "description": "Present on 400/404/500 responses"
+          }
+        }
+      },
+      "audit": {
+        "logRequest": true,
+        "logResult": true,
+        "artifactTypes": [
+          "log"
+        ]
+      },
+      "requiresHumanApproval": false
+    }
+  ],
+  "installHooks": {
+    "onInstall": "start-innerscape-service"
+  },
+  "compatibility": {
+    "shellVersion": "^0.1.0",
+    "platforms": [
+      "macOS",
+      "linux",
+      "windows"
+    ]
+  }
+}
