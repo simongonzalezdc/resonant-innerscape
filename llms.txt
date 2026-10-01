@@ -1,0 +1,27 @@
+# Innerscape — ResonantOS add-on (local-only agent surface)
+
+The agent surface of Innerscape (the personal growth OS) — the project brief,
+the module map, and a bounded reflective planning prompt — served to your
+local AI agents as a private loopback service. It contains zero personal data:
+no journal entries, no emotional check-ins, no sleep logs. It requests zero
+capabilities, persists nothing, and never sends anything anywhere. Your inner
+life stays yours.
+
+## Canonical links
+
+- This repo: https://github.com/simongonzalezdc/resonant-innerscape
+- Canonical upstream: https://github.com/KyaniteLabs/Innerscape (MIT)
+
+## Key facts
+
+- ResonantOS 2.0.0-alpha add-on; validator: 0 errors / 0 warnings
+- License: MIT
+- Wraps only the stateless CLI module (brief, modules, plan); the
+  data-bearing backend (72 endpoints), mobile app, and MCP stdio loop are not
+  vendored and not reachable through this service
+- Zero capabilities, zero persistence, zero egress; personal-data scan in CI
+
+Relationship: community gift by Kyanite Labs for ResonantOS — canonical
+upstream: https://github.com/KyaniteLabs/Innerscape; this wrapper is
+non-canonical; where anything here disagrees with the canonical upstream, the
+canonical upstream wins.
